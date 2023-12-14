@@ -9,6 +9,8 @@ onMount(async () => {
 	const resultJson = await response.json()
 
 	rcps = resultJson.recipes
+
+	console.log(rcps)
 })
 
 </script>
@@ -17,14 +19,18 @@ onMount(async () => {
 	<title>Recipes - GreenPlates</title>
 </svelte:head>
 
-<main class="relative z-10">
+<main class="sm:relative z-10">
 
 	{#if rcps === undefined}
 		Loading data...
 	{:else}
-		{#each rcps as r}
-			<RecipeCard title={r.Title} />
-		{/each}
+		<div class="flex justify-center py-4">
+			<div class="grid grid-cols-1 gap-4 justify-center lg:grid-cols-3 sm:grid-cols-2">
+				{#each rcps as r}
+					<RecipeCard title={r.Title} description="{r.Description}" />
+				{/each}
+			</div>
+		</div>
 	{/if}
 
 </main>
